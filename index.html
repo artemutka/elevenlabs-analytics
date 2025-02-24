@@ -7,12 +7,20 @@
     <!-- Подключаем Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        :root {
+            --brand-color: #526d7a;
+            --accent-color: #222629;
+            --menu-text-color: #97c3d8;
+            --menu-highlight-color: #ffffff;
+            --light-brand-color: #6f8a97;
+            --very-light-brand-color: #e5ebed;
+        }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f3f4f6;
             margin: 0;
             padding: 20px;
-            color: #333;
+            color: var(--accent-color);
             line-height: 1.6;
         }
         .container {
@@ -22,21 +30,33 @@
         .header {
             text-align: center;
             margin-bottom: 30px;
+            background-color: var(--brand-color);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
         }
         h1 {
-            color: #2563eb;
             margin-bottom: 10px;
+            color: var(--menu-highlight-color);
         }
         h2 {
-            color: #4b5563;
+            color: var(--menu-text-color);
             font-weight: normal;
             margin-top: 0;
         }
         .monthly-cost {
-            color: #2563eb;
+            color: var(--menu-highlight-color);
             font-size: 1.2rem;
             font-weight: bold;
             margin-top: 10px;
+        }
+        .data-source {
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        .data-source a {
+            color: var(--menu-highlight-color);
+            text-decoration: underline;
         }
         .stats-row {
             display: flex;
@@ -54,20 +74,11 @@
             background-color: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .blue-bg {
-            background-color: #ebf5ff;
+        .brand-bg {
+            background-color: var(--very-light-brand-color);
         }
-        .green-bg {
-            background-color: #ecfdf5;
-        }
-        .amber-bg {
-            background-color: #fffbeb;
-        }
-        .indigo-bg {
-            background-color: #eef2ff;
-        }
-        .purple-bg {
-            background-color: #faf5ff;
+        .brand-accent-bg {
+            background-color: rgba(34, 38, 41, 0.1);
         }
         .stat-value {
             font-size: 2rem;
@@ -76,22 +87,16 @@
         }
         .stat-label {
             font-size: 0.9rem;
-            color: #4b5563;
+            color: var(--accent-color);
         }
-        .blue-text {
-            color: #3b82f6;
+        .brand-text {
+            color: var(--brand-color);
         }
-        .green-text {
-            color: #10b981;
+        .accent-text {
+            color: var(--accent-color);
         }
-        .amber-text {
-            color: #f59e0b;
-        }
-        .indigo-text {
-            color: #6366f1;
-        }
-        .purple-text {
-            color: #8b5cf6;
+        .menu-text {
+            color: var(--menu-text-color);
         }
         .section {
             background-color: white;
@@ -105,11 +110,15 @@
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 1px solid #e5e7eb;
+            color: var(--brand-color);
         }
         .chart-container {
             position: relative;
             height: 300px;
             margin-bottom: 20px;
+        }
+        .comparison-chart {
+            height: 400px;
         }
         .two-columns {
             display: grid;
@@ -129,27 +138,38 @@
         }
         .highlight {
             font-weight: bold;
+            color: var(--brand-color);
         }
         .conclusion {
-            background-color: #dbeafe;
+            background-color: var(--very-light-brand-color);
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 20px;
         }
         .conclusion h4 {
-            color: #1e40af;
+            color: var(--brand-color);
             margin-top: 0;
             margin-bottom: 10px;
             font-size: 1.2rem;
         }
-        .alternatives {
-            border: 1px solid #e5e7eb;
-            padding: 20px;
-            border-radius: 8px;
+        .note {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
         }
-        .alternatives h4 {
-            margin-top: 0;
-            margin-bottom: 10px;
+        .section-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        .section-footer a {
+            color: var(--brand-color);
+            text-decoration: none;
+        }
+        .section-footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -159,31 +179,34 @@
             <h1>Аналитика использования аудиоплеера ElevenLabs</h1>
             <h2>Период: 31.01.2025 - 23.02.2025</h2>
             <div class="monthly-cost">Стоимость сервиса: $20/месяц</div>
+            <div class="data-source">
+                <a href="https://docs.google.com/spreadsheets/d/1Obk6XQ7B5asFRT0-byUpCOFBGYgps_jX_Vopjz6Kb3g/edit?gid=0#gid=0" target="_blank">Источник данных ElevenLabs</a>
+            </div>
         </div>
         
         <div class="section">
             <h3>Основные показатели</h3>
             <div class="stats-row">
-                <div class="stat-box blue-bg">
-                    <div class="stat-value blue-text">1,721</div>
+                <div class="stat-box brand-bg">
+                    <div class="stat-value brand-text">1,721</div>
                     <div class="stat-label">Загрузок плеера</div>
                 </div>
-                <div class="stat-box green-bg">
-                    <div class="stat-value green-text">32</div>
+                <div class="stat-box brand-accent-bg">
+                    <div class="stat-value accent-text">32</div>
                     <div class="stat-label">Воспроизведений</div>
                 </div>
-                <div class="stat-box amber-bg">
-                    <div class="stat-value amber-text">29</div>
+                <div class="stat-box brand-bg">
+                    <div class="stat-value brand-text">29</div>
                     <div class="stat-label">Уникальных слушателей</div>
                 </div>
             </div>
             <div class="stats-row">
-                <div class="stat-box indigo-bg">
-                    <div class="stat-value indigo-text">1.86%</div>
+                <div class="stat-box brand-accent-bg">
+                    <div class="stat-value accent-text">1.86%</div>
                     <div class="stat-label">Коэффициент воспроизведения</div>
                 </div>
-                <div class="stat-box purple-bg">
-                    <div class="stat-value purple-text">55м 9с</div>
+                <div class="stat-box brand-bg">
+                    <div class="stat-value brand-text">55м 9с</div>
                     <div class="stat-label">Общее время воспроизведения</div>
                 </div>
             </div>
@@ -202,6 +225,16 @@
                 <div class="chart-container">
                     <canvas id="timeDistributionChart"></canvas>
                 </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>Сравнение показателей взаимодействия (Январь vs Февраль 2025)</h3>
+            <div class="chart-container comparison-chart">
+                <canvas id="comparisonChart"></canvas>
+            </div>
+            <div class="section-footer">
+                <a href="https://docs.google.com/spreadsheets/d/1Obk6XQ7B5asFRT0-byUpCOFBGYgps_jX_Vopjz6Kb3g/edit?gid=1426589131#gid=1426589131" target="_blank">Источник данных Аналитики</a>
             </div>
         </div>
         
@@ -236,24 +269,11 @@
                 <li><span class="highlight">Стоимость на прослушивание:</span> $0.63 на одно воспроизведение</li>
                 <li><span class="highlight">Распределение по страницам:</span> Из 17 статей только 10 имеют хотя бы одно воспроизведение</li>
                 <li><span class="highlight">Эффективные прослушивания:</span> 6 прослушиваний длились более 1 минуты (20.69% от всех)</li>
+                <li><span class="highlight">Изменение показателей:</span> В феврале среднее время вовлеченности увеличилось на 24.8%, однако показатель отказов также вырос на 28.1%</li>
             </ul>
-        </div>
-        
-        <div class="section">
-            <h3>Варианты оптимизации</h3>
-            <div class="alternatives">
-                <h4>Возможные улучшения:</h4>
-                <ul>
-                    <li>Сделать плеер более заметным на странице</li>
-                    <li>Добавить привлекательное описание для аудиоверсии</li>
-                    <li>Интегрировать плеер с другими элементами UX (например, предложить прослушать во время скроллинга)</li>
-                    <li>Сократить количество страниц с плеером, оставив его только на самых популярных статьях</li>
-                    <li>Рассмотреть альтернативные сервисы с более низкой стоимостью</li>
-                </ul>
-            </div>
             <div class="conclusion">
                 <h4>Вывод</h4>
-                <p>Текущие показатели использования показывают низкий уровень вовлеченности пользователей в аудиоформат. Рекомендуется пересмотреть стратегию использования аудиоплеера или рассмотреть альтернативные варианты.</p>
+                <p>Текущие показатели использования демонстрируют низкий уровень вовлеченности пользователей в аудиоформат. Несмотря на увеличение среднего времени вовлеченности в феврале, общее количество прослушиваний остается невысоким относительно стоимости сервиса.</p>
             </div>
         </div>
     </div>
@@ -264,8 +284,8 @@
             labels: ['Загрузки без воспроизведения', 'Загрузки с воспроизведением'],
             datasets: [{
                 data: [1689, 32],
-                backgroundColor: ['#d32f2f', '#4caf50'],
-                hoverBackgroundColor: ['#b71c1c', '#388e3c']
+                backgroundColor: ['#222629', '#526d7a'],
+                hoverBackgroundColor: ['#1a1d1f', '#455c68']
             }]
         };
         
@@ -273,8 +293,8 @@
             labels: ['Менее 1 минуты', '1-5 минут', '5-10 минут', 'Более 10 минут'],
             datasets: [{
                 data: [3, 3, 0, 3],
-                backgroundColor: ['#ffeb3b', '#ff9800', '#f44336', '#2196f3'],
-                hoverBackgroundColor: ['#fdd835', '#fb8c00', '#e53935', '#1e88e5']
+                backgroundColor: ['#97c3d8', '#526d7a', '#222629', '#304149'],
+                hoverBackgroundColor: ['#85b2c9', '#455c68', '#1a1d1f', '#273540']
             }]
         };
         
@@ -283,8 +303,8 @@
             datasets: [{
                 label: 'Количество воспроизведений',
                 data: [11, 4, 3, 3, 3],
-                backgroundColor: '#8884d8',
-                borderColor: '#6d67bd',
+                backgroundColor: '#526d7a',
+                borderColor: '#455c68',
                 borderWidth: 1
             }]
         };
@@ -294,8 +314,8 @@
             datasets: [{
                 label: 'Время воспроизведения (мин)',
                 data: [19.45, 17.97, 11.28, 2.48, 1.62], // конвертировано из секунд в минуты для наглядности
-                backgroundColor: '#82ca9d',
-                borderColor: '#61b283',
+                backgroundColor: '#97c3d8',
+                borderColor: '#85b2c9',
                 borderWidth: 1
             }]
         };
@@ -305,10 +325,31 @@
             datasets: [{
                 label: 'Стоимость ($)',
                 data: [0.63, 0.69, 0.36],
-                backgroundColor: '#d32f2f',
-                borderColor: '#b71c1c',
+                backgroundColor: '#222629',
+                borderColor: '#1a1d1f',
                 borderWidth: 1
             }]
+        };
+        
+        // Данные для сравнительного графика
+        const comparisonData = {
+            labels: ['Среднее время вовлеченности (сек)', 'Показатель отказов (%)'],
+            datasets: [
+                {
+                    label: 'Январь 2025',
+                    data: [52.7, 27.7],
+                    backgroundColor: '#526d7a',
+                    borderColor: '#455c68',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Февраль 2025',
+                    data: [65.8, 35.5],
+                    backgroundColor: '#97c3d8',
+                    borderColor: '#85b2c9',
+                    borderWidth: 1
+                }
+            ]
         };
         
         // Инициализация графиков
@@ -343,6 +384,41 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false
+                }
+            });
+            
+            // Сравнительный график
+            new Chart(document.getElementById('comparisonChart'), {
+                type: 'bar',
+                data: comparisonData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.dataset.label || '';
+                                    const value = context.raw || 0;
+                                    if (context.dataIndex === 0) {
+                                        return `${label}: ${value} сек`;
+                                    } else {
+                                        return `${label}: ${value}%`;
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    return value;
+                                }
+                            }
+                        }
+                    }
                 }
             });
             
